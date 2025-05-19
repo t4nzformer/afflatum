@@ -1,0 +1,15 @@
+# Node
+node_modules/
+.env
+
+# Python
+__pycache__/
+*.pyc
+
+# Vite / CRA / Django
+dist/
+build/
+.env.*
+
+# OS
+.DS_Store
