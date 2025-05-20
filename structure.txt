@@ -1,0 +1,70 @@
+.
+├── .DS_Store
+├── .gitignore
+├── README.md
+├── backend
+│   ├── .DS_Store
+│   ├── .env
+│   ├── config
+│   │   ├── __init__.py
+│   │   ├── asgi.py
+│   │   ├── settings.py
+│   │   ├── settings.py~
+│   │   ├── urls.py
+│   │   └── wsgi.py
+│   ├── core
+│   │   ├── __init__.py
+│   │   ├── admin.py
+│   │   ├── apps.py
+│   │   ├── migrations
+│   │   │   ├── 0001_initial.py
+│   │   │   └── __init__.py
+│   │   ├── models.py
+│   │   ├── permissions.py
+│   │   ├── serializers.py
+│   │   ├── signals.py
+│   │   ├── tests.py
+│   │   ├── urls.py
+│   │   └── views.py
+│   ├── manage.py
+│   └── src
+│       ├── .DS_Store
+│       ├── controllers
+│       ├── middlewares
+│       ├── models
+│       ├── routes
+│       └── utils
+├── database
+│   └── schema.sql
+├── design
+├── dev-notes.md
+├── docs
+│   ├── .DS_Store
+│   ├── Afflatum_MVP_Full_Overview.pdf
+│   └── summary.md
+├── frontend
+│   ├── .gitignore
+│   ├── README.md
+│   ├── eslint.config.js
+│   ├── index.html
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── postcss.config.js
+│   ├── public
+│   │   └── vite.svg
+│   ├── src
+│   │   ├── App.tsx
+│   │   ├── index.css
+│   │   ├── main.tsx
+│   │   └── vite-env.d.ts
+│   ├── tailwind.config.js
+│   ├── tailwind.input.css
+│   ├── tailwindcss
+│   ├── tsconfig.app.json
+│   ├── tsconfig.json
+│   ├── tsconfig.node.json
+│   └── vite.config.ts
+├── structure.txt
+└── tests
+
+18 directories, 50 files
