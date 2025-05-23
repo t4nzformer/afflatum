@@ -23,7 +23,7 @@ function Login() {
       localStorage.setItem('access', response.data.access);
       localStorage.setItem('refresh', response.data.refresh);
       login();
-      navigate('/profile'); // 🔥 redirect directly to profile after login
+      navigate('/profile/me'); // redirect directly to profile after login
 
     } catch (err) {
       setError('Login failed. Check your credentials.');

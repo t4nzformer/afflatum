@@ -7,24 +7,29 @@ type Profile = {
   created_at: string;
 };
 
-export function useProfile() {
+export function useProfile(username?: string) {
   const [profile, setProfile] = useState<Profile | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchProfile = async () => {
-      const res = await fetch('http://localhost:8000/api/profiles/me/', {
+      const endpoint = username
+        ? `http://localhost:8000/api/profiles/${username}/`
+        : `http://localhost:8000/api/profiles/me/`;
+
+      const res = await fetch(endpoint, {
         headers: {
           Authorization: 'Bearer ' + localStorage.getItem('access'),
         },
       });
+
       const data = await res.json();
       setProfile(data);
       setLoading(false);
     };
 
     fetchProfile();
-  }, []);
+  }, [username]);
 
   return { profile, loading };
 }

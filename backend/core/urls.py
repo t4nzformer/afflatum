@@ -11,8 +11,9 @@ from .views import (
     CommentViewSet,
     LikeViewSet,
     UserProfileViewSet,
+    my_profile,
+    my_projects,  # new import
 )
-from . import views
 
 router = DefaultRouter()
 router.register(r'projects', ProjectViewSet)
@@ -21,7 +22,8 @@ router.register(r'likes', LikeViewSet)
 router.register(r'profiles', UserProfileViewSet)
 
 urlpatterns = [
-    path('profiles/me/', views.my_profile),
+    path('profiles/me/', my_profile),
+    path('projects/mine/', my_projects),  # new route
     path('', include(router.urls)),
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),

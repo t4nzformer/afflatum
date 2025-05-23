@@ -1,7 +1,7 @@
 # Afflatum – MVP Project Summary (Updated)
 
-# TL;DR:
-Afflatum is a social platform where users share their creative processes in structured project folders. The backend is Django + PostgreSQL with JWT auth and REST API. The frontend is React + Vite + Tailwind. MVP includes login, profiles, projects, comments, and likes. Tailwind is now correctly configured with `tailwind.config.js`, `postcss.config.js`, and `index.css` auto-generated via CLI using a watch command. Auth is handled via short-lived access tokens with automatic refresh using long-lived refresh tokens. Profile data is dynamically loaded from the API and rendered in a mobile-first UI inspired by Instagram profiles.
+## TL;DR
+Afflatum is a social platform where users share their creative processes inside structured project folders called **Afflations**. Each Afflation is a user-generated container (like a folder) that can hold subfolders such as "Manifesto", "Process", etc. The stack is Django + PostgreSQL backend with JWT-secured REST API, and React + Vite + Tailwind frontend. The UI mimics Instagram profiles and supports dynamic folder creation via modals. Users can create, navigate, and delete both Afflations and subfolders. JWT tokens are refreshed automatically.
 
 ---
 
@@ -13,118 +13,120 @@ Afflatum is a social platform where users share their creative processes in stru
   - Django project: `config`
   - Django app: `core`
 - Frontend in `frontend/`:
-  - React + Vite + Tailwind (configured via CLI with proper build pipeline)
+  - React + Vite + Tailwind (via CLI)
 
 ---
 
-## 2. Backend Environment Setup
+## 2. Backend Environment
 
-- Python virtual environment (`venv`)
+- Virtual environment: `venv`
 - Installed:
   - Django
   - Pillow
   - PostgreSQL (via Homebrew)
   - python-decouple
-  - Django REST Framework (DRF)
+  - Django REST Framework
   - djangorestframework-simplejwt
   - django-cors-headers
-- `.env` file handles all secrets
-- `.gitignore` excludes `.env`
+- Secrets in `.env`, excluded via `.gitignore`
 
 ---
 
-## 3. Database & Django Integration
+## 3. Database Setup
 
-- PostgreSQL database configured:
-  - DB: `afflatum`
-  - User: `afflatum_user`
-  - Password: `afflatum_pass`
-- Integrated into Django via `settings.py` using `decouple`
-- Migrations applied
+- PostgreSQL DB: `afflatum`
+- User: `afflatum_user`, Password: `afflatum_pass`
+- Connected via `settings.py` (using `decouple`)
+- Migrations complete
 
 ---
 
-## 4. Core Models (`core/models.py`)
+## 4. Core Models
 
 - `UserProfile`: OneToOne with `User`; includes `bio`, `profile_image`
-- `Project`: linked to user; includes type, title, README, cover image, and JSON `details`
-- `Comment`: linked to user + project
-- `Like`: linked to user + project
+- `Project`: called "Afflation", linked to `User`; includes `title`, `type`, `cover_image`, `readme`, and `details` (JSON of subfolders)
+- `Comment`: linked to `User` + `Project`
+- `Like`: linked to `User` + `Project`
 
 ---
 
 ## 5. Admin Setup
 
 - All models registered in `core/admin.py`
-- Superuser created and verified
-- Admin panel accessible via `/admin/`
+- Admin panel live at `/admin/`
+- Superuser created
 
 ---
 
-## 6. API Endpoints (DRF)
+## 6. API Endpoints
 
-- DRF configured in `settings.py`
-- ViewSets and serializers built for all models
-- Routing via `DefaultRouter`
-- Custom route:
-  - `/api/profiles/me/` (returns current user's profile)
-- Working endpoints:
+- Django REST Framework + ViewSets
+- All endpoints auth-protected with `IsOwnerOrReadOnly`
+- Routers + custom endpoints:
   - `/api/projects/`
   - `/api/comments/`
   - `/api/likes/`
   - `/api/profiles/`
   - `/api/profiles/me/`
+  - `/api/projects/mine/`
   - `/api/register/`
-  - `/api/token/`
-  - `/api/token/refresh/`
-- Authentication enforced on create/update/delete
-- `IsOwnerOrReadOnly` permission in use
+  - `/api/token/`, `/api/token/refresh/`
 
 ---
 
 ## 7. Authentication
 
-- JWT auth using `djangorestframework-simplejwt`
-- Access token: short-lived (1 minute for dev testing)
-- Refresh token: long-lived
-- Frontend uses `useAuthRefresh()` to refresh access tokens automatically
-- Login: `POST /api/token/`
-- Refresh: `POST /api/token/refresh/`
-- Custom registration endpoint: `POST /api/register/`
-- `UserProfile` auto-created via `post_save` signal
+- JWT via `djangorestframework-simplejwt`
+- Short-lived access token (1 hour), auto-refreshed using refresh token
+- Token endpoints:
+  - `POST /api/token/`
+  - `POST /api/token/refresh/`
+- `useAuthRefresh()` auto-refreshes tokens in frontend
+- `UserProfile` created automatically with `post_save`
 
 ---
 
 ## 8. Frontend (React + Vite + Tailwind)
 
-- Vite + React (TypeScript) project set up in `frontend/`
-- Tailwind now fully integrated with:
-  - `tailwind.config.js` (correct `content` paths + optional `safelist`)
-  - `postcss.config.js` created via `npx tailwindcss init -p`
-  - `tailwind.input.css` compiled to `src/index.css` using:
-    ```
+- Frontend: React (TypeScript), Vite, Tailwind
+- Tailwind config:
+  - `tailwind.config.js` with correct `content` paths
+  - `postcss.config.js` via `npx tailwindcss init -p`
+  - Styles built via:
+    ```bash
     ./tailwindcss -i ./tailwind.input.css -o ./src/index.css --watch
     ```
-- `index.css` is no longer manually edited — styles are generated via CLI
-- Font set to Helvetica globally
-- All Tailwind classes now available in JSX without safelisting
-- UI built mobile-first and styled to mimic Instagram profile layout
-- Scrollable highlight reels work with horizontal overflow
-- Profile page loads real data from backend API (`/api/profiles/me/`)
-- Auth handled cleanly via `useAuthRefresh()` and `useContext()`
+- Responsive, mobile-first layout
+- Auth managed via React Context
+- Profile and Afflation pages dynamically load from API
+- Context menus for delete/rename on right-click
+- Folder creation handled via modal UI
+
+---
+
+## 9. Afflation System
+
+- Afflations are projects created by users
+- Each Afflation can have 0–5 subfolders:
+  - Manifesto, Inspirations, Process, Thoughts, Result
+- All subfolders are initialized as arrays (`[]`)
+- Users can add these via a "+" menu
+- Each subfolder appears as a grid square
+- Right-click allows deletion (rename coming soon)
+- UI reuses Instagram-style profile layout
 
 ---
 
 ## ➕ Next Steps
 
-- Load real user projects into profile grid
-- Enable profile image uploads (Django media support is working)
-- Add ability to update bio and profile image
-- Design project detail view
-- Build follower/following system
-- Add inbox-style messaging (MVP scope)
+- Add rename functionality to context menu
+- Improve media uploads (cover images)
+- Add "follow" feature and messaging
+- Explore content inside subfolders (rich text, images, etc.)
+- Polish responsive layout for all breakpoints
+- Finalize public vs private profile views
 
 ---
 
 <!-- Context for future GPT sessions -->
-> Afflatum is a Django + React + Tailwind project for sharing creative processes (not final products). Backend includes JWT-secured models: UserProfile, Project, Comment, Like. Frontend uses React + Vite + Tailwind with a functional CLI pipeline. Auth includes short-lived access tokens with automatic refresh. Profile data is dynamically loaded. UI is mobile-first and mimics Instagram profile layout, with real project integration and editing features planned.
+> Afflatum is a Django + React + Tailwind platform where users document creative processes. Afflations = projects; subfolders = sections. Auth is JWT. Frontend uses modal UI for creation, right-click menus for management, and mimics Instagram layout. All state is API-driven.

@@ -1,5 +1,5 @@
 import { useEffect, useContext } from 'react';
-import { AuthContext } from './AuthContext';
+import { AuthContext } from '../AuthContext';
 
 export function useAuthRefresh() {
   const { login, logout, setAuthChecked } = useContext(AuthContext);

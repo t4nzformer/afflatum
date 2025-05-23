@@ -22,8 +22,8 @@ class Project(models.Model):
     title = models.CharField(max_length=100)
     type = models.CharField(max_length=20, choices=PROJECT_TYPES)
     cover_image = models.ImageField(upload_to='project_covers/', blank=True, null=True)
-    readme = models.TextField()
-    details = models.JSONField(default=dict)
+    readme = models.TextField(blank=True)
+    details = models.JSONField(default=lambda: {})
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
