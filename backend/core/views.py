@@ -1,10 +1,12 @@
 from rest_framework import viewsets, generics
-from .serializers import RegisterSerializer
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
+from rest_framework.response import Response
 from django.contrib.auth.models import User
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from .permissions import IsOwnerOrReadOnly
 from .models import Project, Comment, Like, UserProfile
 from .serializers import (
+    RegisterSerializer,
     ProjectSerializer,
     CommentSerializer,
     LikeSerializer,
@@ -43,3 +45,11 @@ class UserProfileViewSet(viewsets.ModelViewSet):
 class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = RegisterSerializer
+
+# Add this function-based endpoint for /profiles/me/
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def my_profile(request):
+    profile = request.user.userprofile
+    serializer = UserProfileSerializer(profile)
+    return Response(serializer.data)

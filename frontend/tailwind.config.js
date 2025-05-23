@@ -1,7 +1,7 @@
 module.exports = {
   content: [
     "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
+    "./src/**/*.{js,ts,jsx,tsx}"
   ],
   safelist: [
     'bg-gradient-to-br',
@@ -14,6 +14,9 @@ module.exports = {
     'items-center',
     'justify-center',
     'h-screen',
+    'bg-red-500',
+    'p-4',
+    'gap-x-6',
     'w-screen'
   ],
   theme: {

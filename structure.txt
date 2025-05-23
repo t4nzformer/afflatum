@@ -1,15 +1,47 @@
 .
-├── .DS_Store
+├── .git
+│   ├── COMMIT_EDITMSG
+│   ├── HEAD
+│   ├── config
+│   ├── description
+│   ├── hooks
+│   │   ├── applypatch-msg.sample
+│   │   ├── commit-msg.sample
+│   │   ├── fsmonitor-watchman.sample
+│   │   ├── post-update.sample
+│   │   ├── pre-applypatch.sample
+│   │   ├── pre-commit.sample
+│   │   ├── pre-merge-commit.sample
+│   │   ├── pre-push.sample
+│   │   ├── pre-rebase.sample
+│   │   ├── pre-receive.sample
+│   │   ├── prepare-commit-msg.sample
+│   │   ├── push-to-checkout.sample
+│   │   └── update.sample
+│   ├── index
+│   ├── info
+│   │   ├── exclude
+│   │   └── refs
+│   ├── logs
+│   │   ├── HEAD
+│   │   └── refs
+│   ├── objects
+│   │   ├── 32
+│   │   ├── info
+│   │   └── pack
+│   ├── packed-refs
+│   └── refs
+│       ├── heads
+│       ├── remotes
+│       └── tags
 ├── .gitignore
 ├── README.md
 ├── backend
-│   ├── .DS_Store
 │   ├── .env
 │   ├── config
 │   │   ├── __init__.py
 │   │   ├── asgi.py
 │   │   ├── settings.py
-│   │   ├── settings.py~
 │   │   ├── urls.py
 │   │   └── wsgi.py
 │   ├── core
@@ -17,8 +49,6 @@
 │   │   ├── admin.py
 │   │   ├── apps.py
 │   │   ├── migrations
-│   │   │   ├── 0001_initial.py
-│   │   │   └── __init__.py
 │   │   ├── models.py
 │   │   ├── permissions.py
 │   │   ├── serializers.py
@@ -27,19 +57,22 @@
 │   │   ├── urls.py
 │   │   └── views.py
 │   ├── manage.py
-│   └── src
-│       ├── .DS_Store
-│       ├── controllers
-│       ├── middlewares
-│       ├── models
-│       ├── routes
-│       └── utils
+│   ├── src
+│   │   ├── controllers
+│   │   ├── middlewares
+│   │   ├── models
+│   │   ├── routes
+│   │   └── utils
+│   └── venv
+│       ├── bin
+│       ├── include
+│       ├── lib
+│       └── pyvenv.cfg
 ├── database
 │   └── schema.sql
 ├── design
 ├── dev-notes.md
 ├── docs
-│   ├── .DS_Store
 │   ├── Afflatum_MVP_Full_Overview.pdf
 │   └── summary.md
 ├── frontend
@@ -54,12 +87,19 @@
 │   │   └── vite.svg
 │   ├── src
 │   │   ├── App.tsx
+│   │   ├── AuthContext.tsx
+│   │   ├── Login.tsx
+│   │   ├── PrivateRoute.tsx
+│   │   ├── TailwindProbe.tsx
 │   │   ├── index.css
 │   │   ├── main.tsx
+│   │   ├── useAuthRefresh.ts
+│   │   ├── useProfile.ts
 │   │   └── vite-env.d.ts
 │   ├── tailwind.config.js
 │   ├── tailwind.input.css
 │   ├── tailwindcss
+│   ├── tailwindcss-macos-arm64
 │   ├── tsconfig.app.json
 │   ├── tsconfig.json
 │   ├── tsconfig.node.json
@@ -67,4 +107,4 @@
 ├── structure.txt
 └── tests
 
-18 directories, 50 files
+35 directories, 73 files
