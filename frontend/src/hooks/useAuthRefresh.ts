@@ -45,5 +45,6 @@ export function useAuthRefresh() {
     };
 
     refreshAccessToken();
+    // The dependency array ensures this runs only once (if login, logout, setAuthChecked are memoized)
   }, [login, logout, setAuthChecked]);
 }

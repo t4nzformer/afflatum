@@ -54,7 +54,7 @@ function Login() {
         {error && <p className="text-red-500 mb-4 text-sm">{error}</p>}
         <button
           type="submit"
-          className="w-full bg-blue-600 text-white p-3 rounded hover:bg-blue-700"
+          className="w-full bg-gray-700 text-white p-3 rounded hover:bg-gray-600"
         >
           Log In
         </button>

@@ -1,13 +1,10 @@
 .
-├── .DS_Store
 ├── .gitignore
 ├── CHANGELOG.md
 ├── README.md
 ├── backend
-│   ├── .DS_Store
 │   ├── .env
 │   ├── config
-│   │   ├── .DS_Store
 │   │   ├── __init__.py
 │   │   ├── asgi.py
 │   │   ├── settings.py
@@ -28,24 +25,14 @@
 │   │   ├── tests.py
 │   │   ├── urls.py
 │   │   └── views.py
-│   ├── manage.py
-│   └── src
-│       ├── .DS_Store
-│       ├── controllers
-│       ├── middlewares
-│       ├── models
-│       ├── routes
-│       └── utils
+│   └── manage.py
 ├── database
 │   └── schema.sql
-├── design
 ├── dev-notes.md
 ├── docs
-│   ├── .DS_Store
 │   ├── Afflatum_MVP_Full_Overview.pdf
 │   └── summary.md
 ├── frontend
-│   ├── .DS_Store
 │   ├── .gitignore
 │   ├── README.md
 │   ├── eslint.config.js
@@ -62,23 +49,27 @@
 │   │   ├── PrivateRoute.tsx
 │   │   ├── TailwindProbe.tsx
 │   │   ├── components
-│   │   │   └── CreateAfflationModal.tsx
+│   │   │   ├── CreateAfflationModal.tsx
+│   │   │   └── ProfileHeader.tsx
 │   │   ├── hooks
+│   │   │   ├── fetchWithAuth.ts
 │   │   │   ├── useAuthRefresh.ts
 │   │   │   └── useProfile.ts
 │   │   ├── index.css
 │   │   ├── main.tsx
 │   │   ├── pages
 │   │   │   ├── AfflationPage.tsx
+│   │   │   ├── FolderPage.tsx
 │   │   │   └── ProfilePage.tsx
 │   │   └── vite-env.d.ts
 │   ├── tailwind.config.js
 │   ├── tailwind.input.css
+│   ├── tailwindcss
+│   ├── tailwindcss-macos-arm64
 │   ├── tsconfig.app.json
 │   ├── tsconfig.json
 │   ├── tsconfig.node.json
 │   └── vite.config.ts
-├── structure.txt
-└── tests
+└── structure.txt
 
-21 directories, 61 files
+13 directories, 60 files

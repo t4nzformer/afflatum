@@ -60,10 +60,10 @@ export default function CreateAfflationModal({ onClose, onCreated }: Props) {
           <>
             <p className="text-sm text-gray-300">Select type:</p>
             <button
-              className="w-full bg-blue-600 hover:bg-blue-700 py-2 rounded-md"
+              className="w-full bg-gray-800 hover:bg-gray-700 py-2 rounded-md"
               onClick={() => setStep('title')}
             >
-              🎨 Painting
+              Painting
             </button>
           </>
         )}
@@ -73,7 +73,7 @@ export default function CreateAfflationModal({ onClose, onCreated }: Props) {
             <label className="text-sm text-gray-300 block">Afflation Title</label>
             <input
               className="w-full bg-neutral-800 text-white px-3 py-2 rounded border border-neutral-700 focus:outline-none"
-              placeholder="e.g. My Painting #1"
+              placeholder="e.g. new WIP"
               maxLength={20}
               value={title}
               onChange={(e) => setTitle(e.target.value)}
@@ -81,7 +81,7 @@ export default function CreateAfflationModal({ onClose, onCreated }: Props) {
             />
 
             <button
-              className="w-full bg-blue-600 hover:bg-blue-700 py-2 rounded-md"
+              className="w-full bg-gray-800 hover:bg-gray-700 py-2 rounded-md"
               onClick={handleCreate}
               disabled={loading}
             >

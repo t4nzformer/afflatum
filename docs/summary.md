@@ -1,50 +1,49 @@
 # Afflatum – MVP Project Summary (Updated)
 
 ## TL;DR
-Afflatum is a social platform where users share their creative processes inside structured project folders called **Afflations**. Each Afflation is a user-generated container (like a folder) that can hold subfolders such as "Manifesto", "Process", etc. The stack is Django + PostgreSQL backend with JWT-secured REST API, and React + Vite + Tailwind frontend. The UI mimics Instagram profiles and supports dynamic folder creation via modals. Users can create, navigate, and delete both Afflations and subfolders. JWT tokens are refreshed automatically.
+Afflatum is a social platform where users document their creative processes inside structured project folders called **Afflations**. Each Afflation is a user-owned container that holds dynamically created subfolders (like "Manifesto", "Process", etc.). The tech stack is Django + PostgreSQL backend (JWT-secured REST API) and React + Vite + Tailwind frontend. The UI mimics Instagram profiles, supports modal-based creation, and uses reusable context menus for item management. JWT tokens auto-refresh. Users can create, view, and delete both Afflations and subfolders.
 
 ---
 
 ## 1. Project Structure
 
-- Root folder: `Afflatum/`
-- Git repo initialized and pushed to GitHub
+- Root: `Afflatum/`
 - Backend in `backend/`:
-  - Django project: `config`
-  - Django app: `core`
+  - Django project: `config/`
+  - Django app: `core/`
 - Frontend in `frontend/`:
-  - React + Vite + Tailwind (via CLI)
+  - React + Vite + Tailwind
 
 ---
 
 ## 2. Backend Environment
 
-- Virtual environment: `venv`
+- Virtualenv: `venv`
 - Installed:
   - Django
   - Pillow
   - PostgreSQL (via Homebrew)
   - python-decouple
   - Django REST Framework
-  - djangorestframework-simplejwt
+  - simplejwt
   - django-cors-headers
-- Secrets in `.env`, excluded via `.gitignore`
+- `.env` holds secrets, excluded via `.gitignore`
 
 ---
 
 ## 3. Database Setup
 
 - PostgreSQL DB: `afflatum`
-- User: `afflatum_user`, Password: `afflatum_pass`
-- Connected via `settings.py` (using `decouple`)
-- Migrations complete
+- User: `afflatum_user`, PW: `afflatum_pass`
+- Connected via `settings.py` using `decouple`
+- Migrations completed
 
 ---
 
 ## 4. Core Models
 
 - `UserProfile`: OneToOne with `User`; includes `bio`, `profile_image`
-- `Project`: called "Afflation", linked to `User`; includes `title`, `type`, `cover_image`, `readme`, and `details` (JSON of subfolders)
+- `Project`: aka Afflation; linked to `User`; has `title`, `type`, `cover_image`, `readme`, and `details` (JSON structure)
 - `Comment`: linked to `User` + `Project`
 - `Like`: linked to `User` + `Project`
 
@@ -60,9 +59,9 @@ Afflatum is a social platform where users share their creative processes inside 
 
 ## 6. API Endpoints
 
-- Django REST Framework + ViewSets
-- All endpoints auth-protected with `IsOwnerOrReadOnly`
-- Routers + custom endpoints:
+- REST Framework + ViewSets
+- All views protected with `IsOwnerOrReadOnly`
+- Routers:
   - `/api/projects/`
   - `/api/comments/`
   - `/api/likes/`
@@ -77,56 +76,57 @@ Afflatum is a social platform where users share their creative processes inside 
 ## 7. Authentication
 
 - JWT via `djangorestframework-simplejwt`
-- Short-lived access token (1 hour), auto-refreshed using refresh token
+- 1-hour access token, auto-refreshed via refresh token
 - Token endpoints:
   - `POST /api/token/`
   - `POST /api/token/refresh/`
-- `useAuthRefresh()` auto-refreshes tokens in frontend
-- `UserProfile` created automatically with `post_save`
+- `useAuthRefresh()` hook auto-refreshes tokens
+- `UserProfile` is created automatically via `post_save`
 
 ---
 
 ## 8. Frontend (React + Vite + Tailwind)
 
-- Frontend: React (TypeScript), Vite, Tailwind
-- Tailwind config:
-  - `tailwind.config.js` with correct `content` paths
-  - `postcss.config.js` via `npx tailwindcss init -p`
-  - Styles built via:
+- Stack: React (TypeScript), Vite, Tailwind
+- Tailwind setup:
+  - `tailwind.config.js` includes correct content paths
+  - Run:
     ```bash
     ./tailwindcss -i ./tailwind.input.css -o ./src/index.css --watch
     ```
-- Responsive, mobile-first layout
-- Auth managed via React Context
-- Profile and Afflation pages dynamically load from API
-- Context menus for delete/rename on right-click
-- Folder creation handled via modal UI
+- Responsive mobile-first layout
+- JWT auth managed via React Context
+- Profile, Afflation, and Folder pages all dynamically loaded
+- Modal-based creation (`+`) for Afflations and folders
+- Right-click triggers `ContextMenu` component (shared)
+- Context menu handles delete/rename
 
 ---
 
 ## 9. Afflation System
 
-- Afflations are projects created by users
-- Each Afflation can have 0–5 subfolders:
+- Afflations = user-created "projects"
+- Each Afflation can have subfolders (0–5):
   - Manifesto, Inspirations, Process, Thoughts, Result
-- All subfolders are initialized as arrays (`[]`)
-- Users can add these via a "+" menu
-- Each subfolder appears as a grid square
-- Right-click allows deletion (rename coming soon)
-- UI reuses Instagram-style profile layout
+- Stored as key-arrays in `details` JSON field
+- Folder creation via "+" menu
+- All folders shown in a grid
+- Reusable scroll strip shows afflations or folders
+- Deletion via right-click → context menu
+- UI mimics Instagram profile layout
 
 ---
 
 ## ➕ Next Steps
 
-- Add rename functionality to context menu
-- Improve media uploads (cover images)
-- Add "follow" feature and messaging
-- Explore content inside subfolders (rich text, images, etc.)
-- Polish responsive layout for all breakpoints
-- Finalize public vs private profile views
+- Finish rename functionality in context menu
+- Add support for media uploads (cover images, embeds)
+- Build follow and messaging system
+- Add real content support in folders (text, media)
+- Polish styling + responsiveness across devices
+- Separate public vs private views
 
 ---
 
 <!-- Context for future GPT sessions -->
-> Afflatum is a Django + React + Tailwind platform where users document creative processes. Afflations = projects; subfolders = sections. Auth is JWT. Frontend uses modal UI for creation, right-click menus for management, and mimics Instagram layout. All state is API-driven.
+> Afflatum = Django + React + Tailwind platform to document creative processes. Afflations = projects. Each holds folders like "Process", "Thoughts", etc. Auth is JWT. Modals handle creation, right-click menus handle management. API drives all state. Layout mimics Instagram but focused on introspection and artistic growth.

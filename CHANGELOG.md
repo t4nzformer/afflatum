@@ -1,3 +1,13 @@
+## structure tree: tree -a -L 4 -I "node_modules|__pycache__|*.pyc|.git|*.DS_Store|venv|dist|build" > structure.txt 
+
+## backend: python manage.py runserver
+
+## frontend: npm run dev
+
+## tailwind: ./tailwindcss -i ./tailwind.input.css -o ./src/index.css --watch
+
+## venv backend: source venv/bin/activate
+
 ## [v0.11] - 2025-05-23
 
 ### Added
